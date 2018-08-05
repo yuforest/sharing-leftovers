@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SharingLife</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+      <div>
+        Sharing Life
+      </div>
+      <nav class="header-nav">
+        <ul>
+          <li>HOUSE</li>
+          <li>FOOD</li>
+          <li>CLOTHING</li>
+          <li>OTHER</li>
+          <% if logged_in? %>
+            <li><%= link_to "Profile", user_path(current_user.id) %></li>
+            <li><%= link_to "Logout", session_path(current_user.id), method: :delete %></li>
+          <% else %>
+            <li><%= link_to "Sign up", new_user_path %></li>
+            <li><%= link_to "Login", new_session_path %></li>
+          <% end %>
+        </ul>
+      </nav>
+    </header>
+    <% flash.each do |key, value| %>
+      <%= content_tag(:div, value, class: "#{key}") %>
+    <% end %>
+    
+    <%= yield %>
+    
+    <footer>
+      <p>Sharing Life 2018 ALL RIGHT RESERVED</p>
+    </footer>
+  </body>
+</html>

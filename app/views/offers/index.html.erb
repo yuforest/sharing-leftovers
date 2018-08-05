@@ -1,0 +1,20 @@
+<h1>オファー一覧</h1>
+
+<table>
+  <tr>
+    <th>タイトル</th>
+    <th>内容</th>
+  </tr>
+
+<% @offers.each do |offer| %>
+  <tr>
+    <td><%= offer.title %></td>
+    <td><%= offer.content %></td>
+    <td><%= link_to '詳細を確認する', offer_path(offer.id) %></td>
+    <td><%= link_to "オファーを編集する", edit_offer_path(offer.id) %></td>
+    <td><%= link_to 'オファーを削除する', offer_path(offer.id), method: :delete,
+    data: { confirm: '本当に削除していいですか？' }  %></td>
+  </tr>
+<% end %>
+</table>
+<%= link_to '新しくオファーを作成する', new_offer_path %>
