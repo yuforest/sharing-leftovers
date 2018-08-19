@@ -1,0 +1,50 @@
+
+<div class="text-center py-5 text-white other-cover">
+  <h1>オファー一覧</h1>
+</div>
+<table>
+  <tr>
+    <th>タイトル</th>
+    <th>内容</th>
+    <th>場所</th>
+  </tr>
+
+<% @leftovers.each do |leftover| %>
+  <% if !params[:category_id] %>
+    <tr>
+      <% current_offer = Offer.find_by(leftover_id: leftover.id,
+      user_id: current_user.id) if current_user %>
+      <td><%= leftover.title %></td>
+      <td><%= leftover.content %></td>
+      <td><%= leftover.address %></td>
+      <td><%= link_to '詳細を確認する', leftover_path(leftover.id) %></td>
+      <% if !current_offer && current_user %>
+        <td><%= link_to "オファーに申請する", offers_path(
+        leftover_id: leftover.id, user_id: current_user.id),
+        method: :post %></td>
+      <% elsif current_offer && current_user %>
+        <td><%= link_to "申請を取り消す", offer_path(
+        current_offer.id),
+        method: :delete %></td>
+      <% end %>      
+      <td><%= link_to "オファーを編集する", edit_leftover_path(leftover.id) %></td>
+      <td><%= link_to 'オファーを削除する', leftover_path(leftover.id), method: :delete,
+      data: { confirm: '本当に削除していいですか？' }  %></td>
+    </tr>
+  <% end %>
+  <% if leftover.category_id == params[:category_id].to_i %>
+    <tr>
+      <td><%= leftover.title %></td>
+      <td><%= leftover.content %></td>
+      <td><%= leftover.address %></td>
+
+      <td><%= link_to '詳細を確認する', leftover_path(leftover.id) %></td>
+      <td><%= link_to "オファーを編集する", edit_leftover_path(leftover.id) %></td>
+      <td><%= link_to 'オファーを削除する', leftover_path(leftover.id), method: :delete,
+      data: { confirm: '本当に削除していいですか？' }  %></td>
+      
+    </tr>
+  <% end %>
+<% end %>
+</table>
+<%= link_to '新しくオファーを作成する', new_leftover_path %>

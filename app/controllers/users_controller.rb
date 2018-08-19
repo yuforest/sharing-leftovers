@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to user_path(@user.id)
     else
-      render 'new'
+      redirect_to '/users/new'
     end
   end
   

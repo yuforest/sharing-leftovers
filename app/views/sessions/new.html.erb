@@ -1,11 +1,21 @@
-<h1>Log in</h1>
+
+<div class="text-center py-5 text-white about-cover">
+  <h1>Log in</h1>
+</div>
+<div class="py-5">
 <%= form_with(scope: :session, url: sessions_path, local: true) do |f| %>
-
-  <%= f.label :email %>
-  <%= f.email_field :email %>
-
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-
-  <%= f.submit "Log in" %>
+  <div class="text-center d-block">
+    <%= f.label :email, class: "d-block" %>
+    <div>
+      <%= f.email_field :email, class: "text-input" %>
+    </div>
+  </div>
+  <div class="block text-center">
+    <%= f.label :password, class: "block d-block" %>
+    <%= f.password_field :password, class: "text-input" %>
+  </div>
+  <div class="block text-center">
+    <%= f.submit "ログイン", class: "button-input" %>
+  </div>
+</div>
 <% end %>

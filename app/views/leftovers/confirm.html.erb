@@ -1,0 +1,28 @@
+<div class="text-center py-5 other-cover text-white">
+  <h1>確認画面</h1>
+</div>
+<%= form_with(model: @leftover, url: leftovers_path, local: true) do |form| %>
+  <%= form.hidden_field :title %>
+  <%= form.hidden_field :content %>
+   <%= form.hidden_field :image_cache %>
+  <%= form.hidden_field :address %>
+  <%= form.hidden_field :start_on %>
+  <%= form.hidden_field :end_on %>
+  <%= form.hidden_field :category_id %>
+  
+  <p>タイトル:<%= @leftover.title %></p>
+  <p>本文:<%= @leftover.content %></p>
+  <%= image_tag(@leftover.image.url) %>
+ 
+  <p>場所:<%= @leftover.address %></p>
+  <p>始まり:<%= @leftover.start_on %></p>
+  <p>終わり:<%= @leftover.end_on %></p>
+  <p>カテゴリー: <%= Category.find(@leftover.category_id).name %></p>
+  
+  <%= form.submit  "登録する" %>
+<% end %>
+
+<%= form_with(model:@leftover, url:new_leftover_path, local:true, method:"get") do |form| %>
+  <%= form.hidden_field :image_cache %>
+  <%= form.submit "戻る", name: "back" %>
+<% end %>

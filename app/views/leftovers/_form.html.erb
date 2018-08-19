@@ -1,0 +1,46 @@
+<%= form_with(model: @leftover,local: true, url: choose_new_or_edit) do |form| %>
+  <% if @leftover.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= @leftover.errors.count %>件のエラーがあります。</h2>
+      <ul>
+
+      <% @leftover.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="leftover_title">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+  <div class="leftover_content">
+    <%= form.label :content %>
+    <%= form.text_area :content %>
+  </div>
+  <div class="leftover_image">
+    <%= form.label :image %>
+    <%= image_tag(@leftover.image.url) if @leftover.image.url %>
+    <%= form.file_field :image, id: :leftover_image  %>
+  </div>
+  <div class="leftover_address">
+    <%= form.label :address %>
+    <%= form.text_field :address %>
+  </div>
+  <div class="leftover_start">
+    <%= form.label :start_on %>
+    <%= form.date_field :start_on %>
+  </div>
+  <div class="leftover_end">
+    <%= form.label :end_om %>
+    <%= form.date_field :end_on %>
+  </div>
+  <div class="leftover_category">
+    <%= form.label :category_id %><br />
+    <%= form.collection_select :category_id, Category.all, :id, :name %>
+  </div>
+
+  <%= form.submit %>
+<% end %>
+
+<%= link_to "オファー一覧画面にもどる", leftovers_path %>

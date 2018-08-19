@@ -1,4 +1,9 @@
-<h1>Sign up</h1>
+
+
+<div class="text-center py-5 text-white about-cover">
+  <h1>Sign up</h1>
+</div>
+<div class="py-5">
 <% if @user.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(@user.errors.count, "error") %> prohibited this @user from being saved:</h2>
@@ -10,18 +15,26 @@
   </div>
 <% end %>
 <%= form_with(model: @user, local: true) do |f| %>  
+  <div class="text-center">
+    <%= f.label :name, class: "d-block" %>
+    <%= f.text_field :name, class: "text-input" %>
+  </div>
+  <div class="text-center">
+    <%= f.label :email, class: "d-block" %>
+    <%= f.email_field :email, class: "text-input" %>
+  </div>
   
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-
-  <%= f.label :email %>
-  <%= f.email_field :email %>
-
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %>
-
-  <%= f.submit "Create my account" %>
+  <div class="text-center">
+    <%= f.label :password, class: "d-block" %>
+    <%= f.password_field :password, class: "text-input" %>
+  </div>
+  
+  <div class="text-center">
+    <%= f.label :password_confirmation, class: "d-block" %>
+    <%= f.password_field :password_confirmation, class: "text-input" %>
+  </div>
+  <div class="text-center">
+    <%= f.submit "ユーザー登録をする", class: "button-input" %>
+  </div>
 <% end %>
+</div>

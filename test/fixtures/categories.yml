@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  house: false
+  food: false
+  clothing: 
+  other: false
+
+two:
+  house: false
+  food: false
+  clothing: 
+  other: false
